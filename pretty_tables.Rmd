@@ -1,0 +1,75 @@
+---
+title: "Output Tables INF1340"
+author: "Nicholas Bosco"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Sentiment Analysis Data
+
+```{r cars}
+library(readxl)
+sa_scores <- read_excel("C:/Users/Owner/Desktop/INF1340/Final Project/sa_scores.xlsx")
+sa_scores
+```
+
+```{r}
+# table for sentiment Analysis Data
+knitr::kable(sa_scores,
+      booktabs = TRUE,
+      "pipe",
+      digits = 4,
+      col.names = c("Poem Number", "Hot Encoded", "Translation Type", 
+                    "TextBlob Sentiment Polarity Score", "TextBlob Sentiment Subjectivity Score",
+                    "Naive Bayes Analyzer Positive Score", "Naive Bayes Analyzer Negative Score",
+                    "Vader Analysis Positive Sentiment Score", "Vader Analysis Negative Sentiment Score",
+                    "Vader Analysis Neutral Sentiment Score", "Vader Analysis Compound Sentiment Score"),
+      linesep = "")
+```
+
+```{r}
+library(readxl)
+sa_scores_long <- read_excel("C:/Users/Owner/Desktop/INF1340/Final Project/sa_scores_long.xlsx")
+sa_scores_long
+```
+
+## Tables and Summary Stats
+
+```{r}
+# table for Sentiment df_long
+knitr::kable(sa_scores_long,
+      booktabs = TRUE,
+      "pipe",
+      digits = 4,
+      col.names = c("ID", "Translation Type", "Poem Number", "NLTK Tool", "Sentiment Analysis Score"),
+      linesep = "")
+```
+
+```{r}
+sa_scores_avg <-data.frame(
+  translation_type = c("Human","Machine"),
+  textblob_sentiment_polarity_score = c(0.169164, 0.169907),
+  textblob_sentiment_subjectivity_score = c(0.496595, 0.490850),
+  vader_analysis_pos = c(0.117667, 0.137333),
+  vader_analysis_neutral = c(0.804000, 0.782333),
+  vader_analysis_neg = c(0.078000, 0.080667),
+  vader_analysis_compound = c(0.913000, 0.996333)
+)
+sa_scores_avg
+```
+
+```{r}
+# table for Sentiment df_averages
+knitr::kable(sa_scores_avg,
+      booktabs = TRUE,
+      "pipe",
+      digits = 4,
+      col.names = c("Translation Type", 
+                    "TextBlob Sentiment Polarity Score", "TextBlob Sentiment Subjectivity Score","Vader Analysis Positive Sentiment Score", "Vader Analysis Negative Sentiment Score",
+                    "Vader Analysis Neutral Sentiment Score", "Vader Analysis Compound Sentiment Score"),
+      linesep = "")
+```
